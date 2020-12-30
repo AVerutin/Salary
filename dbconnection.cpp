@@ -13,11 +13,24 @@ QStringList DBConnection::getData()
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("C:\\database.db3");
-    db.open();
+    try
+    {
+        db.open();
+    }  catch (...)
+    {
+        QMessageBox::critical(0, "Ошибка базы данных", "Не удалось открыть базу данных!", QMessageBox::Ok);
+    }
+
 
     //Осуществляем запрос
     QSqlQuery query;
-    query.exec("SELECT _id, name, age FROM People");
+    try
+    {
+        query.exec("SELECT _id, name, age FROM People");
+    }  catch (...)
+    {
+        QMessageBox::critical(0, "Ошибка базы данных", "Не удалось получить данные из базы!", QMessageBox::Ok);
+    }
 
     //Выводим значения из запроса
     while (query.next())

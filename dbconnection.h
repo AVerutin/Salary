@@ -3,6 +3,7 @@
 
 #include <QStringList>
 #include <QtSql>
+#include <QMessageBox>
 
 class DBConnection
 {
